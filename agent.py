@@ -56,14 +56,14 @@ class Agent():
 		
 		# Noise process
 		self.noise = OUNoise((num_agents, action_size), seed)
-		sefl.use_noise = use_noise
+		self.use_noise = use_noise
 
 		self.t_step = 0
 
 	def step(self, states, actions, rewards, next_states, dones):
 		''' Save experience in replay memory, and use random sample from buffer to learn. '''
 		for state, action, reward, next_state, done in zip(states, actions, rewards, next_states, dones):
-			memory.add(state, action, reward, next_state, done)
+			self.memory.add(state, action, reward, next_state, done)
 
 		# update time steps
 		self.t_s = (self.t_step + 1) % UPDATE_EVERY
@@ -71,10 +71,10 @@ class Agent():
 			# time to learn again
 			# provided that there are enough
 			#if len(shared_memory.shared_buffer) > BATCH_SIZE:
-			if len(memory) > BATCH_SIZE:
+			if len(self.memory) > BATCH_SIZE:
 				#experiences = self.memory.sample()
 				#experiences = shared_memory.shared_buffer.sample()
-				experiences = memory.sample()
+				experiences = self.memory.sample()
 				self.learn(experiences, GAMMA)
 
 	def act(self, state):
@@ -137,8 +137,8 @@ class Agent():
 
 
 		# ------------------------ Update Target Networks ----------------------- #
-		self.soft_update(critic_local, critic_target, TAU)
-		self.soft_update(actor_local, actor_target, TAU)
+		self.soft_update(self.critic_local, self.critic_target, TAU)
+		self.soft_update(self.actor_local, self.actor_target, TAU)
 		
 	def soft_update(self, local_model, target_model, tau):
 		"""Soft update model parameters.
