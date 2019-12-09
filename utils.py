@@ -3,6 +3,9 @@ import copy
 import random
 from collections import namedtuple, deque
 
+# Pytorch imports 
+import torch
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class OUNoise:
