@@ -40,7 +40,7 @@ The agents must get an average score of +30 (over 100 consecutive episodes, and 
 
 The environment is considered solved, when the average (over 100 episodes) of those average scores is at least +30. 
 
-## Installatino Instructions
+## Getting Started
 
 1. Follow the [instructions in the DRLND GitHub repository](https://github.com/udacity/deep-reinforcement-learning#dependencies) to setup a python environment. 
 By following these instructions, you will install PyTorch, the ML-Agents toolkit, and a few more Python packages required to complete the project.
